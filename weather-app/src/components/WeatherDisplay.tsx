@@ -8,7 +8,7 @@ import { RiLoader2Fill } from "react-icons/ri";
 import React from 'react';
 import { WeatherDisplayWrapper } from './Weather.module';
 import { WeatherDataInterface } from '../services/Weather';
-import { fetchCurrentWeather, fetchWeatherData, fetchHourlyWeatherData } from '../services/WeatherService';
+import { fetchCurrentWeather,  fetchWeatherData } from '../services/WeatherService'; // fetchHourlyWeatherData add later
 import { iconChanger } from './WeatherIcon';
 import { SearchBar } from './SearchBar';
 import { Footer } from './Footer';
@@ -17,7 +17,7 @@ import { Header } from './Header';
 // Soner library for toast notifications
 import { Toaster, toast } from 'sonner';
 
-import { WeatherDetail } from './WeatherGraph';
+import { WeatherGraph } from './WeatherGraph';
 import { CityMap } from './WeatherMap';
 
 
@@ -31,6 +31,8 @@ export const WeatherDisplay = () => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     // Track if the details are visible or not
     const [showDetails, setShowDetails] = React.useState(false);
+    // Create a state to store the hourly weather data
+    const [ weatherDataHourly, setWeatherDataHourly ] = React.useState<WeatherDataInterface[]>([]);
   
     
     // Handels the search functionality when the user enters a city name in the input field
@@ -40,13 +42,20 @@ export const WeatherDisplay = () => {
         if (searchCity.trim() === "") {
           return;
         }
+
         
         // Find the weather data for the city
         try {
           const { currentWeatherData } = await fetchWeatherData(searchCity);
-          setWeatherData(currentWeatherData);
 
-                  
+          
+          // Extract the hourly data from the response
+          const { lat, lon } = currentWeatherData.coord;
+          // const hourlyWeatherData = await fetchHourlyWeatherData(lat, lon);
+
+          setWeatherData(currentWeatherData);
+          //setWeatherDataHourly(hourlyWeatherData.hourly);
+
 
         } catch (error: any) {
             // If the city is not found, show a toast notification
@@ -69,12 +78,17 @@ export const WeatherDisplay = () => {
             const { latitude, longitude } = position.coords;
 
             // Fetch the current weather data for the user's location
-            const [currentWeather] = await Promise.all([fetchCurrentWeather(latitude, longitude)]);
+            const [currentWeather /*, hourlyData */] = await Promise.all(
+                [fetchCurrentWeather(latitude, longitude)
+                //fetchHourlyWeatherData(latitude, longitude)
+                ]
+            );
             setWeatherData(currentWeather);
+            console.log(currentWeather);
 
-            // Fetch the hourly weather data for the next 24 hours
-            //   const hourlyData = await fetchHourlyWeatherData(latitude, longitude);
-            //   setHourlyData(hourlyData);
+            // Transfer the hourly data to the required format
+            //setWeatherDataHourly(hourlyData.hourly);
+
 
           setIsLoading(true);
         });
@@ -82,7 +96,6 @@ export const WeatherDisplay = () => {
   
       fetchData();
     }, []);
-  
 
 
     return (
@@ -138,11 +151,12 @@ export const WeatherDisplay = () => {
                             <button className="dropbtn" onClick={toggleDetails}>
                                 {showDetails ? "Hide Weather Details" : "Show Weather Details"}
                             </button>
+                            
 
                             {/* Dropdown for weather details */}
                             {showDetails && (
                                 <>
-                                    <WeatherDetail weatherData={weatherData} />
+                                    {/*{weatherDataHourly && <WeatherGraph hourlyData={weatherDataHourly} />} */}
                                     <CityMap lat={weatherData.coord.lat} lon={weatherData.coord.lon} name={weatherData.name} />
                                 </>
                             )}

@@ -1,46 +1,51 @@
-import React, { useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+import 'chart.js/auto';
 import { WeatherDataInterface } from '../services/Weather';
 
-interface WeatherDetailProps {
-  weatherData: WeatherDataInterface;
+interface WeatherGraphProps {
+  hourlyData: WeatherDataInterface[];
 }
 
-export const WeatherDetail: React.FC<WeatherDetailProps> = ({ weatherData }) => {
-  // Convert UNIX timestamp to a readable time format
-  const formatTime = (timestamp: number) => {
-    const date = new Date(timestamp * 1000);
-    return `${date.getHours()}:00`;
+export const WeatherGraph: React.FC<WeatherGraphProps> = ({ hourlyData }) => {
+  const data = {
+    labels: hourlyData.map((data) => data.dt),
+    datasets: [
+      {
+        label: 'Temperature (°C)',
+        data: hourlyData.map((data) => data.main.temp),
+        fill: false,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        tension: 0.1, // Adds a smoothing effect
+      },
+    ],
   };
 
-  // Ensure hourlyData is properly set
-  const hourlyData = weatherData.hourly ?? [];
+  const options = {
+    responsive: true,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Time',
+        },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 10, // Limit the number of ticks
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Temperature (°C)',
+        },
+        beginAtZero: false, // Start from the lowest temperature
+      },
+    },
+  };
 
-  // Debugging: Log the hourly data to ensure it's coming through correctly
-  useEffect(() => {
-    console.log('Hourly Data:', hourlyData);
-  }, [hourlyData]);
-
-  return (
-    <div className="weather-detail" style={{ padding: '20px', width: '100%', boxSizing: 'border-box' }}>
-      <h2>Weather Details for {weatherData.name}</h2>
-
-      <div className="temperature-graph" style={{ height: '400px', width: '400px'}}>
-        <h3>Temperature Changes (Next 24 Hours)</h3>
-        {hourlyData.length > 0 ? (
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={hourlyData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="dt" tickFormatter={formatTime} />
-              <YAxis />
-              <Tooltip />
-              <Line type="monotone" dataKey="temp" stroke="#8884d8" activeDot={{ r: 8 }} />
-            </LineChart>
-          </ResponsiveContainer>
-        ) : (
-          <p>Loading hourly data...</p>
-        )}
-      </div>
-    </div>
-  );
+  return <Line data={data} options={options} />;
 };
+
+export default WeatherGraph;

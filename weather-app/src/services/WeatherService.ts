@@ -28,11 +28,14 @@ export const fetchWeatherData = async (city: string) => {
   }
 };
 
-// Function to fetch the weather data for the next 24 hours
-export const fetchHourlyWeatherData = async (lat: number, lon: number) => {
-  // Use OpenWeatherMap's One Call API to fetch hourly weather data
-  const url = `${api_base}onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,daily&appid=${api_key}&units=metric`;
-  const response = await axios.get(url);
-  return response.data.hourly;
-}
-
+// Fetch the hourly weather data for the next 24 hours using One Call API
+// export const fetchHourlyWeatherData = async (lat: number, lon: number) => {
+//   try {
+//     const url = `https://${api_base}forecast/hourly?lat=${lat}&lon=${lon}&appid=5cdcdb46e10352ad8afa20b97592cb8f&units=metric`;
+//     const response = await axios.get(url);
+//     return response.data;
+//   } catch (error) {
+//     // If error isn't thrown by axios, throw a new error
+//     throw error;
+//   }
+// };
