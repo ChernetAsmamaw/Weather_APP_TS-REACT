@@ -11,9 +11,6 @@ export interface WeatherDataInterface {
     main: {
         temp: number;
         humidity: number;
-        feels_like: number;
-        temp_min: number;
-        temp_max: number;
     };
     wind: {
         speed: number;
@@ -30,4 +27,12 @@ export interface WeatherDataInterface {
     };
     dt: number;
     timezone: number;
+    dt_txt: string;
+}
+
+// Props for the hourly weather data
+export interface HourlyWeatherData {
+    temp: number;
+    dt: number;
+    dt_txt: string;
 }

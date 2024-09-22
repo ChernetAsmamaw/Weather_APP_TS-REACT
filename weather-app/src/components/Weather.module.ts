@@ -153,7 +153,7 @@ export const WeatherDisplayWrapper = styled.div`
         font-size: 16px;
         border: none;
         cursor: pointer;
-        margin: 30px 20px;
+        margin: 20px;
     }
 
     .weather-detail {

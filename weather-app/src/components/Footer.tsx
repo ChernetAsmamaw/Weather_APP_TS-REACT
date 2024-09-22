@@ -1,3 +1,4 @@
+import React from 'react';
 import { WeatherDisplayWrapper } from './Weather.module';
 import { FaGithub } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";

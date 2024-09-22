@@ -1,3 +1,4 @@
+import React from 'react';
 import { WeatherDisplayWrapper } from "./Weather.module";
 
 export const Header = () => {
