@@ -2,6 +2,7 @@
   "name": "weather-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/ChernetAsmamaw/Weather_APP_TS-REACT/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -20,7 +21,9 @@
     "start": "webpack serve --open",
     "build": "webpack",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +49,7 @@
     "chart.js": "^4.4.4",
     "css-loader": "^7.1.2",
     "dotenv": "^16.4.5",
+    "gh-pages": "^6.1.1",
     "html-webpack-plugin": "^5.6.0",
     "leaflet": "^1.9.4",
     "react-chartjs-2": "^5.2.0",

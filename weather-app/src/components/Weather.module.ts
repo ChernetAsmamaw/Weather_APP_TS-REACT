@@ -30,11 +30,13 @@ export const WeatherDisplayWrapper = styled.div`
 
     .searchArea {
         margin-top: 20px;
+        margin-right: 30px;
+        margin-left: 30px;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         width: 100%;
-        padding: 10px;
+        padding: 8px 10px;
 
         > input {
             outline: none;
@@ -44,7 +46,7 @@ export const WeatherDisplayWrapper = styled.div`
             text-align: center;
             width: 75%;
             background: transparent;
-            font-size: 18px;
+            font-size: 14px;
         }
 
         .searchCircle {
@@ -56,9 +58,10 @@ export const WeatherDisplayWrapper = styled.div`
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            right: 10px;
 
             .searchIcon {
-                font-size: 25px;
+                font-size: 20px;
                 color: grey;
             }
         }
@@ -68,11 +71,11 @@ export const WeatherDisplayWrapper = styled.div`
         display: flex;
         align-items: center;
         flex-direction: column;
-        margin: 30px 0;
+        margin: 20px 0;
 
         .weatherIcon {
-            padding: 6px;
-            font-size: 8rem;
+            padding: 4px;
+            font-size: 7rem;
         }
 
         h1 {
@@ -80,11 +83,11 @@ export const WeatherDisplayWrapper = styled.div`
         }
 
         span {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         h2 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 400;
         }
     }
@@ -96,7 +99,7 @@ export const WeatherDisplayWrapper = styled.div`
         margin: 10px;
         background: linear-gradient(90deg, rgba(243, 255, 253, 1) 0%, rgba(253, 255, 232, 1) 100%);
         border-radius: 12px;
-        padding: 10px;
+        padding: 8px;
         width: 100%;
 
         .humidityLevel,
@@ -107,11 +110,11 @@ export const WeatherDisplayWrapper = styled.div`
         }
 
         .humidityIcon {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
         }
 
         .windIcon {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-right: 10px;
         }
     }
@@ -146,11 +149,13 @@ export const WeatherDisplayWrapper = styled.div`
     }
 
     .dropbtn {
-        background-color: #073b4c;
-        color: white;
-        padding: 10px;
-        border-radius: 8px;
-        font-size: 16px;
+        background: linear-gradient(90deg, #102c57 0%, #134d3f 100%);
+        color: lightgrey;
+        padding: 12px 28px;
+        padding-bottom: 15px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 14px;
         border: none;
         cursor: pointer;
         margin: 20px;

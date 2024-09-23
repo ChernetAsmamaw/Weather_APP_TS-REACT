@@ -10,7 +10,7 @@ export const SearchBar: React.FC<SearchBarInterface> = ({ searchCity, setSearchC
     <div className="searchArea">
       <input
         type="text"
-        placeholder="Enter a city"
+        placeholder="Enter name of a City or Country"
         value={searchCity}
         onChange={(e) => setSearchCity(e.target.value)}
         onKeyPress={(e) => {

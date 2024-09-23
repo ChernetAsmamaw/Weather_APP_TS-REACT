@@ -60,6 +60,11 @@ module.exports = {
     devServer: {
         static: './dist',
         hot: true,
+        compress: true,
+        port: 3000,
+        open: true,
+        liveReload: true,
+        watchFiles: ['src/**/*'],
     },
     mode: 'development',
 };

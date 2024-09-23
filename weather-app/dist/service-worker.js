@@ -67,7 +67,7 @@ if (!self.define) {
     });
   };
 }
-define(['./workbox-74015f45'], (function (workbox) { 'use strict';
+define(['./workbox-74854057'], (function (workbox) { 'use strict';
 
   self.skipWaiting();
   workbox.clientsClaim();
@@ -88,7 +88,7 @@ define(['./workbox-74015f45'], (function (workbox) { 'use strict';
     "revision": null
   }, {
     "url": "bundle.js",
-    "revision": "1e6119cedd409f02ecad5eedb4575606"
+    "revision": "f24edfb850ed58f4b042788dd245c7ef"
   }, {
     "url": "index.html",
     "revision": "2b527287bb86e898c6d86d3e590a3994"
